@@ -1,0 +1,22 @@
+C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\bin\Release\netcoreapp3.1\Flappy Bird.exe
+C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\bin\Release\netcoreapp3.1\Flappy Bird.deps.json
+C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\bin\Release\netcoreapp3.1\Flappy Bird.runtimeconfig.json
+C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\bin\Release\netcoreapp3.1\Flappy Bird.runtimeconfig.dev.json
+C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\bin\Release\netcoreapp3.1\Flappy Bird.dll
+C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\bin\Release\netcoreapp3.1\Flappy Bird.pdb
+C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\bin\Release\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
+C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\bin\Release\netcoreapp3.1\OpenTK.dll
+C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\bin\Release\netcoreapp3.1\Program.dll
+C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\bin\Release\netcoreapp3.1\SixLabors.ImageSharp.dll
+C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\bin\Release\netcoreapp3.1\System.Drawing.Common.dll
+C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\bin\Release\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\bin\Release\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\bin\Release\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\obj\Release\netcoreapp3.1\Flappy Bird.csprojAssemblyReference.cache
+C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\obj\Release\netcoreapp3.1\Flappy Bird.AssemblyInfoInputs.cache
+C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\obj\Release\netcoreapp3.1\Flappy Bird.AssemblyInfo.cs
+C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\obj\Release\netcoreapp3.1\Flappy Bird.csproj.CoreCompileInputs.cache
+C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\obj\Release\netcoreapp3.1\Flappy Bird.csproj.CopyComplete
+C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\obj\Release\netcoreapp3.1\Flappy Bird.dll
+C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\obj\Release\netcoreapp3.1\Flappy Bird.pdb
+C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\obj\Release\netcoreapp3.1\Flappy Bird.genruntimeconfig.cache
