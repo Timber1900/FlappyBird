@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
+using System.Text;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 using Program;
-using SixLabors.ImageSharp.Processing.Processors.Quantization;
 
 namespace Flappy_Bird
 {
@@ -28,7 +29,7 @@ namespace Flappy_Bird
             public float Gap;
             public float xPos;
             public float yOff;
-            public System.Boolean hasScored = false;
+            public bool hasScored = false, hasHitBottom = false, hasHitTop = false;
 
             public void setXpos(float _xPos)
             {
@@ -38,10 +39,12 @@ namespace Flappy_Bird
         Random rd = new Random();
         private Bird bird;
         private List<Pipe> pipe = new List<Pipe> ();
-        int x = 0, cur = 0, score = 0;
-        float tOff = 0, bOff;
-        private System.Boolean tag = true;
+        int score = 0, miss = 0, lastY = 0;
+        float tOff = 0, bOff, curDif = 0.35f, cur = 0, angle = 0f, x = 0, diePlace = 0;
+        private bool tag = true, missTagBase = true, isPaused = false, hasStarted = false, hasDied = false;
         private Texture pipeTexture, background, floor;
+        Font arial;
+        Font flappy;
 
         public Game(int width, int height, string title)
             : base(width, height, title)
@@ -55,16 +58,22 @@ namespace Flappy_Bird
             RenderLight = false; //Makes the 3D light visible
             UseAlpha = true; //Enables alpha use
             KeyboardAndMouseInput = false; //Enables keyboard and mouse input for 3D movement
+            useSettings = true;
             CursorVisible = true;
             bird = new Bird { pos = new Vector2(Width / 2, Height / 2), vel = new Vector2(0f, 0f) };
             pipe.Add(new Pipe { Gap = 200f, xPos = Width, yOff = 50f});
-            loadFont("assets/arial.fnt", "assets/arial_0.png");
+            arial = new Font("assets/arial.fnt", "assets/arial_0.png");
+            flappy = new Font("assets/flappy.fnt", "assets/flappy_0.png");
             pipeTexture = new Texture("assets/pipe-green.png", TextureMinFilter.Nearest, TextureMagFilter.Nearest);
             background = new Texture("assets/background-day.png", TextureMinFilter.Nearest, TextureMagFilter.Nearest);
             floor = new Texture("assets/base.png", TextureMinFilter.Nearest, TextureMagFilter.Nearest);
             bOff = Width;
+
+            set.addButton("Exit Game", 10, 10, 180, 40, Color4.Blue, () => { Exit(); return 1; }, arial);
+            set.readSettings();
             base.OnLoad(e);
         }
+
 
         protected override void OnRenderFrame(FrameEventArgs e)
         {
@@ -78,7 +87,14 @@ namespace Flappy_Bird
             renderBase();
             showBird(bird);
 
-            drawText(String.Format("Score: {0}", score), new Vector2(0f, Height - 32), Color4.Red);
+            drawText(string.Format("High Score: {0}", set.settings["High Score"]), 32, 0f, Height - 32, arial, Color4.Red);
+            drawText(string.Format("Score: {0}", score), 32, 0f, Height - 64, arial, Color4.Red);
+            drawText(string.Format("Miss: {0}", miss), 32, 0f, Height - 96, arial, Color4.Red);
+
+            var l = getPhraseLength(Convert.ToString(score), 64, flappy);
+            l = (Width - l) / 2;
+            drawText(Convert.ToString(score), 64, l, (Height / 2) + 200, flappy, Color4.White);
+
             base.OnRenderFrame(e);
 
         }
@@ -86,50 +102,121 @@ namespace Flappy_Bird
 
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
-            float change = 250f * (float)e.Time;
-            foreach (Pipe p in pipe)
+            isPaused = showSet;
+            if (!isPaused && hasStarted && !hasDied)
             {
-                p.xPos -= change;
-            }
-            bOff -= change;
-
-            for (var i = pipe.Count - 1; i >= 0; i--)
-            {
-                if(pipe[i].xPos < -100)
+                float change = 500f * (float)e.Time;
+                foreach (Pipe p in pipe)
                 {
-                    pipe.Remove(pipe[i]);
+                    p.xPos -= change;
                 }
-            }
+                bOff -= change;
 
-            if(x == 100)
-            {
-                pipe.Add(new Pipe { Gap = 200f + RandomNumber.Between(-25, 25), xPos = Width, yOff = RandomNumber.Between(-200, 312) });
-                x = 0;
-            }
-
-            if (Focused)
-            {
-                var keyboard = Keyboard.GetState();
-                if(keyboard.IsKeyDown(Key.Space) && tag)
+                for (var i = pipe.Count - 1; i >= 0; i--)
                 {
-                    bird.vel.Y = +5f;
+                    if (pipe[i].xPos < -100)
+                    {
+                        pipe.Remove(pipe[i]);
+                    }
+                }
+
+                if (x >= 400)
+                {
+                    var yOff = RandomNumber.Between(-200, 312);
+                    if(yOff - lastY > 325)
+                    {
+                        yOff = lastY + 325;
+                    }
+                    pipe.Add(new Pipe { Gap = 200f + RandomNumber.Between(-25, 25), xPos = Width, yOff = yOff });
+                    lastY = yOff;
+                    x = 0;
+                }
+                x += change;
+
+
+                if (Focused)
+                {
+                    var mouse = Mouse.GetState();
+                    if (mouse.IsButtonDown(MouseButton.Left) && tag)
+                    {
+                        bird.vel.Y = +7.5f;
+                        cur = 30;
+                        tag = false;
+                    }
+                    if (!mouse.IsButtonDown(MouseButton.Left))
+                    {
+                        tag = true;
+                    }
+
+                }
+                bird.Update(new Vector2(0f, -20f), (float)e.Time);
+
+            } 
+            else if(hasDied)
+            {
+                if(diePlace < 25)
+                {
+                    bird.pos.Y += 1;
+                    bird.vel.Y += 5;
+                } else if (diePlace == 25)
+                {
+                    bird.vel.Y = 0;
+
+                }
+                else
+                {
+                    bird.pos.Y -= 25;
+                    bird.vel.Y -= 5;
+
+                }
+                diePlace++;
+            }
+            else
+            {
+                if (Focused)
+                {
+                    var mouse = Mouse.GetState();
+                    if (mouse.IsButtonDown(MouseButton.Left))
+                    {
+                        hasStarted = true;
+                        curDif = 1;
+                    }
+                }
+
+                if(cur <= 0)
+                {
                     cur = 30;
-                    tag = false;
-                }
-                if (!keyboard.IsAnyKeyDown)
-                {
-                    tag = true;
                 }
 
+                if (!showSet)
+                {
+                    float change = 500f * (float)e.Time;
+                    bOff -= change;
+                    bird.pos.Y += (float)Math.Sin(angle);
+                    bird.vel.Y = 0.5f * (float)Math.Sin(angle);
+                    angle += 0.1f;
+                }
+
+                
             }
-            bird.Update(new Vector2(0f, -10f), (float)e.Time);
+
+            var keyboard = Keyboard.GetState();
+            if (keyboard.IsKeyDown(Key.L) && !hasDied)
+            {
+                hasDied = true;
+            }
+            
             base.OnUpdateFrame(e);
-            x++;
         }
 
         protected override void OnUnload(EventArgs e)
         {
             GL.DeleteTexture(pipeTexture.Handle);
+            if (score > Convert.ToInt32(set.settings["High Score"]))
+            {
+                set.settings["High Score"] = score;
+            }
+            set.writeSettings();
             base.OnUnload(e);
         }
         private void showBird(Bird bird)
@@ -148,7 +235,7 @@ namespace Flappy_Bird
             Vector2 p3 = new Vector2((float)(Math.Cos(a) * (-sizex)) - (float)(Math.Sin(a) * (sizey)), (float)(Math.Sin(a) * (-sizex)) + (float)(Math.Cos(a) * (sizey)));
             Vector2 p4 = new Vector2((float)(Math.Cos(a) * (sizex)) - (float)(Math.Sin(a) * (sizey)), (float)(Math.Sin(a) * (sizex)) + (float)(Math.Cos(a) * (sizey)));
 
-            String path = "";
+            string path = "";
 
             if(cur >= 20)
             {
@@ -168,11 +255,11 @@ namespace Flappy_Bird
                              bird.pos.X + p2.X, bird.pos.Y + p2.Y, 1, 0, 0,
                              bird.pos.X + p1.X, bird.pos.Y + p1.Y, 1, 1, 0,
                              bird.pos.X + p3.X, bird.pos.Y + p3.Y, 1, 1, 1,
-                             path, Color4.White, OpenTK.Graphics.OpenGL.TextureMinFilter.Nearest, OpenTK.Graphics.OpenGL.TextureMagFilter.Nearest);
-            if (cur != 0) { cur--; }
+                             path, Color4.White, TextureMinFilter.Nearest, TextureMagFilter.Nearest);
+            if (cur != 0) { cur -= curDif; }
 
-            drawText(String.Format("Bird Heigth: {0}", bird.pos.Y), new Vector2(0f, Height - 64f), Color4.Red);
-            drawText(String.Format("Bird Angle: {0}", a), new Vector2(0f, Height - 96f), Color4.Red);
+            drawText(string.Format("Bird Heigth: {0}", bird.pos.Y), 32, 0f, Height - 128f, arial, Color4.Red);
+            drawText(string.Format("Bird Angle: {0}", a), 32, 0f, Height - 160f, arial, Color4.Red);
 
         }
 
@@ -182,15 +269,25 @@ namespace Flappy_Bird
             if (checkOverlap(16, bird.pos.X, bird.pos.Y, pipe.xPos, 112, pipe.xPos + 100, ((Height - 112) / 2) - (pipe.Gap / 2) + pipe.yOff))
             {
                 col = Color4.Red;
-            }
-            
+                if (!pipe.hasHitTop)
+                {
+                    miss++;
+                    pipe.hasHitTop = true;
+                }
+            } 
+
             drawTexturedRectangle(pipe.xPos, ((Height - 112) / 2) - (pipe.Gap / 2) - 800 + pipe.yOff, 0, 0, pipe.xPos + 100, ((Height - 112) / 2) - (pipe.Gap / 2) + pipe.yOff, 1, 1, pipeTexture, col);
 
             col = Color4.White;
             if (checkOverlap(16, bird.pos.X, bird.pos.Y, pipe.xPos, ((Height - 112) / 2) + (pipe.Gap / 2) + pipe.yOff, pipe.xPos + 100, (Height)))
             {
                 col = Color4.Red;
-            }
+                if (!pipe.hasHitBottom)
+                {
+                    miss++;
+                    pipe.hasHitBottom = true;
+                }
+            } 
             drawTexturedRectangle(pipe.xPos, ((Height - 112) / 2) + (pipe.Gap / 2) + 800 + pipe.yOff, 0, 0, pipe.xPos + 100, ((Height - 112) / 2) + (pipe.Gap / 2) + pipe.yOff, 1 , 1,  pipeTexture, col);
 
             if (pipe.xPos >= (Width / 2) - 2 && pipe.xPos <= (Width / 2) + 3 && !pipe.hasScored)
@@ -232,13 +329,21 @@ namespace Flappy_Bird
             float width = (1000f * 336f) / 512f;
             float nrect = Width / width;
             float xSize = (float)Math.Ceiling(Width / width) * width;
-            drawText(String.Format("bOff: {0}", bOff), new Vector2(0f, Height - 128f), Color4.Red);
-            drawText(String.Format("texture offset: {0}", ((bOff * nrect) / xSize)), new Vector2(0f, Height - 150f), Color4.Red);
+            drawText(String.Format("bOff: {0}", bOff), 32, 0f, Height - 192f, arial, Color4.Red);
+            drawText(String.Format("texture offset: {0}", ((bOff * nrect) / xSize)), 32, 0f, Height - 224f, arial, Color4.Red);
             
             Color4 col = Color4.White;
             if (checkOverlap(16, bird.pos.X, bird.pos.Y, 0, 0, Width, 112))
             {
                 col = Color4.Red;
+                if (missTagBase)
+                {
+                    miss++;
+                    missTagBase = false;
+                }
+            } else
+            {
+                missTagBase = true;
             }
 
             drawTexturedRectangle(0, 0, nrect + ((bOff * nrect) / xSize), 0, xSize, 112, (bOff * nrect) / xSize, 1, floor, col);

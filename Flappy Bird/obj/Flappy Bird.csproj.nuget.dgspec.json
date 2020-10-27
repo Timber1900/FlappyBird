@@ -43,7 +43,7 @@
           "dependencies": {
             "OpenTK.3D.Library": {
               "target": "Package",
-              "version": "[1.5.0, )"
+              "version": "[1.7.0, )"
             }
           },
           "imports": [

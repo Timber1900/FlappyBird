@@ -1,13 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "0pLuVyRX+OB3X+sh6bk9zqWUhv42d2EoKIHpkgLTp50PRr9rNrgMYpxFA0wkMdb3fZNT1G/owJggC+MXDQutDw==",
+  "dgSpecHash": "8A+yiDRPUJUQB50yJtYHT+NrUBR7h4FECsKfd7Xt4L/I5/jXFFAED71HRTIBPyiAKksNci6d/7mt3ds1QD9dJw==",
   "success": true,
   "projectFilePath": "C:\\Users\\35196\\source\\repos\\Flappy Bird\\Flappy Bird\\Flappy Bird.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\35196\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\35196\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\35196\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\35196\\.nuget\\packages\\opentk\\3.2.0\\opentk.3.2.0.nupkg.sha512",
-    "C:\\Users\\35196\\.nuget\\packages\\opentk.3d.library\\1.5.0\\opentk.3d.library.1.5.0.nupkg.sha512",
+    "C:\\Users\\35196\\.nuget\\packages\\opentk.3d.library\\1.7.0\\opentk.3d.library.1.7.0.nupkg.sha512",
     "C:\\Users\\35196\\.nuget\\packages\\sixlabors.imagesharp\\1.0.1\\sixlabors.imagesharp.1.0.1.nupkg.sha512",
     "C:\\Users\\35196\\.nuget\\packages\\system.drawing.common\\4.7.0\\system.drawing.common.4.7.0.nupkg.sha512"
   ],
