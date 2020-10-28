@@ -58,13 +58,29 @@ namespace Flappy_Bird
             _arial = new Font("assets/arial.fnt", "assets/arial_0.png");
             _flappy = new Font("assets/flappy.fnt", "assets/flappy_0.png");
             _pipeTexture = new Texture("assets/pipe-green.png", TextureMinFilter.Nearest, TextureMagFilter.Nearest);
-            _background = new Texture("assets/background-day.png", TextureMinFilter.Nearest, TextureMagFilter.Nearest);
             _floor = new Texture("assets/base.png", TextureMinFilter.Nearest, TextureMagFilter.Nearest);
             _bOff = Width;
             _hasHitFloor = false;
 
             set.addButton("Exit Game", 10, 10, 180, 40, Color4.Blue, () => { Exit(); return 1; }, _arial);
+            set.addButton("Change Background", 10, 60, 180, 40, Color4.Blue, () =>
+            {
+                if (Convert.ToString(set.settings["Background Texture"]) == "assets/background-day.png")
+                {
+                    set.settings["Background Texture"] = "assets/background-night.png";
+                }
+                else
+                {
+                    set.settings["Background Texture"] = "assets/background-day.png";
+
+                }
+                _background = new Texture(Convert.ToString(set.settings["Background Texture"]), TextureMinFilter.Nearest, TextureMagFilter.Nearest);
+                return 1;
+            }, _arial);
+
             set.readSettings();
+            _background = new Texture(Convert.ToString(set.settings["Background Texture"]), TextureMinFilter.Nearest, TextureMagFilter.Nearest);
+
             base.OnLoad(e);
         }
 

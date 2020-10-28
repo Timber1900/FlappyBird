@@ -47,7 +47,7 @@
           "lib/net20/OpenTK.dll": {}
         }
       },
-      "OpenTK.3D.Library/1.7.1": {
+      "OpenTK.3D.Library/1.7.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.Win32.SystemEvents": "4.7.0",
@@ -208,16 +208,16 @@
         "opentk.nuspec"
       ]
     },
-    "OpenTK.3D.Library/1.7.1": {
-      "sha512": "k9kyf2hanrtGprJWTe9L+YkY0pJndcZ8+ICha03FqbTtk78B6JCcDeXqBNX72OuB+mSnxufiMSholxR085gZYw==",
+    "OpenTK.3D.Library/1.7.2": {
+      "sha512": "KLTfehbLWno/caM4j+EEMCcKfNxF/iAoYOzMlPKga7UltKJOlgSCJP6EeB1U/KXx5EIT1jyZYt+FiGsPziQSow==",
       "type": "package",
-      "path": "opentk.3d.library/1.7.1",
+      "path": "opentk.3d.library/1.7.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netcoreapp2.1/Program.dll",
         "lib/netcoreapp3.1/Program.dll",
-        "opentk.3d.library.1.7.1.nupkg.sha512",
+        "opentk.3d.library.1.7.2.nupkg.sha512",
         "opentk.3d.library.nuspec"
       ]
     },
@@ -308,7 +308,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "OpenTK.3D.Library >= 1.7.1",
+      "OpenTK.3D.Library >= 1.7.2",
       "System.Windows.Extensions >= 4.7.0"
     ]
   },
@@ -351,7 +351,7 @@
         "dependencies": {
           "OpenTK.3D.Library": {
             "target": "Package",
-            "version": "[1.7.1, )"
+            "version": "[1.7.2, )"
           },
           "System.Windows.Extensions": {
             "target": "Package",
