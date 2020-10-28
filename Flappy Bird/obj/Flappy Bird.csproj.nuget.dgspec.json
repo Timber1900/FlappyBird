@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\35196\\source\\repos\\Flappy Bird\\Flappy Bird\\Flappy Bird.csproj": {}
+    "C:\\Users\\Hugo Teixeira\\RiderProjects\\FlappyBird\\Flappy Bird\\Flappy Bird.csproj": {}
   },
   "projects": {
-    "C:\\Users\\35196\\source\\repos\\Flappy Bird\\Flappy Bird\\Flappy Bird.csproj": {
+    "C:\\Users\\Hugo Teixeira\\RiderProjects\\FlappyBird\\Flappy Bird\\Flappy Bird.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\35196\\source\\repos\\Flappy Bird\\Flappy Bird\\Flappy Bird.csproj",
+        "projectUniqueName": "C:\\Users\\Hugo Teixeira\\RiderProjects\\FlappyBird\\Flappy Bird\\Flappy Bird.csproj",
         "projectName": "Flappy Bird",
-        "projectPath": "C:\\Users\\35196\\source\\repos\\Flappy Bird\\Flappy Bird\\Flappy Bird.csproj",
-        "packagesPath": "C:\\Users\\35196\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\35196\\source\\repos\\Flappy Bird\\Flappy Bird\\obj\\",
+        "projectPath": "C:\\Users\\Hugo Teixeira\\RiderProjects\\FlappyBird\\Flappy Bird\\Flappy Bird.csproj",
+        "packagesPath": "C:\\Users\\Hugo Teixeira\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Hugo Teixeira\\RiderProjects\\FlappyBird\\Flappy Bird\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\35196\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Hugo Teixeira\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -43,7 +40,11 @@
           "dependencies": {
             "OpenTK.3D.Library": {
               "target": "Package",
-              "version": "[1.7.0, )"
+              "version": "[1.7.1, )"
+            },
+            "System.Windows.Extensions": {
+              "target": "Package",
+              "version": "[4.7.0, )"
             }
           },
           "imports": [
@@ -61,7 +62,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
         }
       }
     }

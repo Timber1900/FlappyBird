@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Text;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
@@ -12,39 +10,35 @@ namespace Flappy_Bird
 {
     class Game : MainRenderWindow
     {
-        struct Bird
+        private struct Bird
         {
-            public Vector2 pos;
-            public Vector2 vel;
+            public Vector2 Pos;
+            public Vector2 Vel;
 
             public void Update(Vector2 force, float fElapsedTime)
             {
-                vel += force * fElapsedTime;
-                pos += vel;
+                Vel += force * fElapsedTime;
+                Pos += Vel;
             }
         }
 
-        class Pipe
+        private class Pipe
         {
             public float Gap;
-            public float xPos;
-            public float yOff;
-            public bool hasScored = false, hasHitBottom = false, hasHitTop = false;
-
-            public void setXpos(float _xPos)
-            {
-                xPos = _xPos;
-            }
+            public float XPos;
+            public float YOff;
+            public bool HasScored;
         }
-        Random rd = new Random();
-        private Bird bird;
-        private List<Pipe> pipe = new List<Pipe> ();
-        int score = 0, miss = 0, lastY = 0;
-        float tOff = 0, bOff, curDif = 0.35f, cur = 0, angle = 0f, x = 0, diePlace = 0;
-        private bool tag = true, missTagBase = true, isPaused = false, hasStarted = false, hasDied = false;
-        private Texture pipeTexture, background, floor;
-        Font arial;
-        Font flappy;
+
+
+        private Bird _bird;
+        private List<Pipe> _pipe = new List<Pipe> ();
+        private int _score, _lastY;
+        private float _tOff, _bOff, _curDif = 0.35f, _cur, _angle, _x, _diePlace;
+        private bool _tag = true, _isPaused, _hasStarted, _hasDied, _hasHitFloor, _hasRestarted = true;
+        private Texture _pipeTexture, _background, _floor;
+        private Font _arial, _flappy;
+
 
         public Game(int width, int height, string title)
             : base(width, height, title)
@@ -60,16 +54,16 @@ namespace Flappy_Bird
             KeyboardAndMouseInput = false; //Enables keyboard and mouse input for 3D movement
             useSettings = true;
             CursorVisible = true;
-            bird = new Bird { pos = new Vector2(Width / 2, Height / 2), vel = new Vector2(0f, 0f) };
-            pipe.Add(new Pipe { Gap = 200f, xPos = Width, yOff = 50f});
-            arial = new Font("assets/arial.fnt", "assets/arial_0.png");
-            flappy = new Font("assets/flappy.fnt", "assets/flappy_0.png");
-            pipeTexture = new Texture("assets/pipe-green.png", TextureMinFilter.Nearest, TextureMagFilter.Nearest);
-            background = new Texture("assets/background-day.png", TextureMinFilter.Nearest, TextureMagFilter.Nearest);
-            floor = new Texture("assets/base.png", TextureMinFilter.Nearest, TextureMagFilter.Nearest);
-            bOff = Width;
+            _bird = new Bird { Pos = new Vector2(Width / 2, Height / 2), Vel = new Vector2(0f, 0f) };
+            _arial = new Font("assets/arial.fnt", "assets/arial_0.png");
+            _flappy = new Font("assets/flappy.fnt", "assets/flappy_0.png");
+            _pipeTexture = new Texture("assets/pipe-green.png", TextureMinFilter.Nearest, TextureMagFilter.Nearest);
+            _background = new Texture("assets/background-day.png", TextureMinFilter.Nearest, TextureMagFilter.Nearest);
+            _floor = new Texture("assets/base.png", TextureMinFilter.Nearest, TextureMagFilter.Nearest);
+            _bOff = Width;
+            _hasHitFloor = false;
 
-            set.addButton("Exit Game", 10, 10, 180, 40, Color4.Blue, () => { Exit(); return 1; }, arial);
+            set.addButton("Exit Game", 10, 10, 180, 40, Color4.Blue, () => { Exit(); return 1; }, _arial);
             set.readSettings();
             base.OnLoad(e);
         }
@@ -79,131 +73,129 @@ namespace Flappy_Bird
         {
             Title = $"Flappy Bird, FPS:{1f / e.Time}";
             Clear();
-            renderBackground();
-            foreach (Pipe p in pipe)
+            RenderBackground();
+            foreach (Pipe p in _pipe)
             {
-                showPipe(p, bird);
+                ShowPipe(p, _bird);
             }
-            renderBase();
-            showBird(bird);
-
-            drawText(string.Format("High Score: {0}", set.settings["High Score"]), 32, 0f, Height - 32, arial, Color4.Red);
-            drawText(string.Format("Score: {0}", score), 32, 0f, Height - 64, arial, Color4.Red);
-            drawText(string.Format("Miss: {0}", miss), 32, 0f, Height - 96, arial, Color4.Red);
-
-            var l = getPhraseLength(Convert.ToString(score), 64, flappy);
+            RenderBase();
+            ShowBird(_bird);
+            
+            //Score Text
+            var l = getPhraseLength(Convert.ToString(_score), 72, _flappy);
             l = (Width - l) / 2;
-            drawText(Convert.ToString(score), 64, l, (Height / 2) + 200, flappy, Color4.White);
-
+            drawText(Convert.ToString(_score), 72, l, (Height / 2) + 300, _flappy, Color4.White);
+            
+            l = getPhraseLength(Convert.ToString(set.settings["High Score"]), 36, _flappy);
+            l = (Width - l) / 2;
+            drawText(Convert.ToString(set.settings["High Score"]), 36, l, (Height / 2) + 228, _flappy, Color4.Yellow);
             base.OnRenderFrame(e);
-
         }
 
 
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
-            isPaused = showSet;
-            if (!isPaused && hasStarted && !hasDied)
+            _isPaused = showSet;
+            MouseState mouse;
+            if (!_isPaused && _hasStarted && !_hasDied)
             {
                 float change = 500f * (float)e.Time;
-                foreach (Pipe p in pipe)
+                foreach (Pipe p in _pipe)
                 {
-                    p.xPos -= change;
+                    p.XPos -= change;
                 }
-                bOff -= change;
+                _bOff -= change;
 
-                for (var i = pipe.Count - 1; i >= 0; i--)
+                for (var i = _pipe.Count - 1; i >= 0; i--)
                 {
-                    if (pipe[i].xPos < -100)
+                    if (_pipe[i].XPos < -100)
                     {
-                        pipe.Remove(pipe[i]);
+                        _pipe.Remove(_pipe[i]);
                     }
                 }
 
-                if (x >= 400)
+                if (_x >= 400)
                 {
                     var yOff = RandomNumber.Between(-200, 312);
-                    if(yOff - lastY > 325)
+                    if(yOff - _lastY > 325)
                     {
-                        yOff = lastY + 325;
+                        yOff = _lastY + 325;
                     }
-                    pipe.Add(new Pipe { Gap = 200f + RandomNumber.Between(-25, 25), xPos = Width, yOff = yOff });
-                    lastY = yOff;
-                    x = 0;
+                    _pipe.Add(new Pipe { Gap = 200f + RandomNumber.Between(-25, 25), XPos = Width, YOff = yOff });
+                    _lastY = yOff;
+                    _x = 0;
                 }
-                x += change;
+                _x += change;
 
 
                 if (Focused)
                 {
-                    var mouse = Mouse.GetState();
-                    if (mouse.IsButtonDown(MouseButton.Left) && tag)
+                    mouse = Mouse.GetState();
+                    if (mouse.IsButtonDown(MouseButton.Left) && _tag)
                     {
-                        bird.vel.Y = +7.5f;
-                        cur = 30;
-                        tag = false;
+                        _bird.Vel.Y = +7.5f;
+                        _cur = 30;
+                        _tag = false;
                     }
                     if (!mouse.IsButtonDown(MouseButton.Left))
                     {
-                        tag = true;
+                        _tag = true;
                     }
 
                 }
-                bird.Update(new Vector2(0f, -20f), (float)e.Time);
+                _bird.Update(new Vector2(0f, -20f), (float)e.Time);
 
             } 
-            else if(hasDied)
+            else if(_hasDied && !_hasHitFloor)
             {
-                if(diePlace < 25)
-                {
-                    bird.pos.Y += 1;
-                    bird.vel.Y += 5;
-                } else if (diePlace == 25)
-                {
-                    bird.vel.Y = 0;
-
-                }
-                else
-                {
-                    bird.pos.Y -= 25;
-                    bird.vel.Y -= 5;
-
-                }
-                diePlace++;
+                _bird.Update(new Vector2(0f, -20f), (float)e.Time);
             }
-            else
+            else if (!_hasDied)
             {
                 if (Focused)
                 {
-                    var mouse = Mouse.GetState();
-                    if (mouse.IsButtonDown(MouseButton.Left))
+                    mouse = Mouse.GetState();
+                    if (mouse.IsButtonDown(MouseButton.Left) && _hasRestarted)
                     {
-                        hasStarted = true;
-                        curDif = 1;
+                        _hasStarted = true;
+                        _curDif = 1;
                     }
                 }
 
-                if(cur <= 0)
+                if(_cur <= 0)
                 {
-                    cur = 30;
+                    _cur = 30;
                 }
 
                 if (!showSet)
                 {
                     float change = 500f * (float)e.Time;
-                    bOff -= change;
-                    bird.pos.Y += (float)Math.Sin(angle);
-                    bird.vel.Y = 0.5f * (float)Math.Sin(angle);
-                    angle += 0.1f;
+                    _bOff -= change;
+                    _bird.Pos.Y += (float)Math.Sin(_angle);
+                    _bird.Vel.Y = 0.5f * (float)Math.Sin(_angle);
+                    _angle += 0.1f;
                 }
-
-                
             }
-
-            var keyboard = Keyboard.GetState();
-            if (keyboard.IsKeyDown(Key.L) && !hasDied)
+            else
             {
-                hasDied = true;
+                mouse = Mouse.GetState();
+                if (mouse.IsButtonDown(MouseButton.Left))
+                { 
+                    RestartGame();
+                }
+            }
+            mouse = Mouse.GetState();
+            if (!mouse.IsAnyButtonDown)
+            {
+                _hasRestarted = true;
+            }
+            
+
+
+            
+            if (_score > Convert.ToInt32(set.settings["High Score"]))
+            {
+                set.settings["High Score"] = _score;
             }
             
             base.OnUpdateFrame(e);
@@ -211,19 +203,19 @@ namespace Flappy_Bird
 
         protected override void OnUnload(EventArgs e)
         {
-            GL.DeleteTexture(pipeTexture.Handle);
-            if (score > Convert.ToInt32(set.settings["High Score"]))
+            GL.DeleteTexture(_pipeTexture.Handle);
+            if (_score > Convert.ToInt32(set.settings["High Score"]))
             {
-                set.settings["High Score"] = score;
+                set.settings["High Score"] = _score;
             }
             set.writeSettings();
             base.OnUnload(e);
         }
-        private void showBird(Bird bird)
+        private void ShowBird(Bird bird)
         {
             //drawEllipse(bird.pos.X, bird.pos.Y, 16f, 16f, Color4.Yellow);
 
-            Vector2 lookDir = new Vector2(5, bird.vel.Y);
+            Vector2 lookDir = new Vector2(5, bird.Vel.Y);
             lookDir.Normalize();
             const int sizey = 16;
             const int sizex = 20;
@@ -235,13 +227,13 @@ namespace Flappy_Bird
             Vector2 p3 = new Vector2((float)(Math.Cos(a) * (-sizex)) - (float)(Math.Sin(a) * (sizey)), (float)(Math.Sin(a) * (-sizex)) + (float)(Math.Cos(a) * (sizey)));
             Vector2 p4 = new Vector2((float)(Math.Cos(a) * (sizex)) - (float)(Math.Sin(a) * (sizey)), (float)(Math.Sin(a) * (sizex)) + (float)(Math.Cos(a) * (sizey)));
 
-            string path = "";
+            string path;
 
-            if(cur >= 20)
+            if(_cur >= 20)
             {
                 path = "assets/yellowbird-downflap.png";
             }
-            else if(cur >= 10)
+            else if(_cur >= 10)
             {
                 path = "assets/yellowbird-midflap.png";
             }
@@ -251,102 +243,98 @@ namespace Flappy_Bird
             } 
 
 
-            drawTexturedQuad(bird.pos.X + p4.X, bird.pos.Y + p4.Y, 1, 0, 1, 
-                             bird.pos.X + p2.X, bird.pos.Y + p2.Y, 1, 0, 0,
-                             bird.pos.X + p1.X, bird.pos.Y + p1.Y, 1, 1, 0,
-                             bird.pos.X + p3.X, bird.pos.Y + p3.Y, 1, 1, 1,
+            drawTexturedQuad(bird.Pos.X + p4.X, bird.Pos.Y + p4.Y, 1, 0, 1, 
+                             bird.Pos.X + p2.X, bird.Pos.Y + p2.Y, 1, 0, 0,
+                             bird.Pos.X + p1.X, bird.Pos.Y + p1.Y, 1, 1, 0,
+                             bird.Pos.X + p3.X, bird.Pos.Y + p3.Y, 1, 1, 1,
                              path, Color4.White, TextureMinFilter.Nearest, TextureMagFilter.Nearest);
-            if (cur != 0) { cur -= curDif; }
-
-            drawText(string.Format("Bird Heigth: {0}", bird.pos.Y), 32, 0f, Height - 128f, arial, Color4.Red);
-            drawText(string.Format("Bird Angle: {0}", a), 32, 0f, Height - 160f, arial, Color4.Red);
-
+            if (_cur != 0) { _cur -= _curDif; }
         }
 
-        private void showPipe(Pipe pipe, Bird bird)
+        private void ShowPipe(Pipe pipe, Bird bird)
         {
             Color4 col = Color4.White;
-            if (checkOverlap(16, bird.pos.X, bird.pos.Y, pipe.xPos, 112, pipe.xPos + 100, ((Height - 112) / 2) - (pipe.Gap / 2) + pipe.yOff))
+            if (CheckOverlap(16, bird.Pos.X, bird.Pos.Y, pipe.XPos, 112, pipe.XPos + 100, ((Height - 112) / 2) - (pipe.Gap / 2) + pipe.YOff))
             {
-                col = Color4.Red;
-                if (!pipe.hasHitTop)
-                {
-                    miss++;
-                    pipe.hasHitTop = true;
-                }
+                _hasDied = true;
             } 
 
-            drawTexturedRectangle(pipe.xPos, ((Height - 112) / 2) - (pipe.Gap / 2) - 800 + pipe.yOff, 0, 0, pipe.xPos + 100, ((Height - 112) / 2) - (pipe.Gap / 2) + pipe.yOff, 1, 1, pipeTexture, col);
+            drawTexturedRectangle(pipe.XPos, ((Height - 112) / 2) - (pipe.Gap / 2) - 800 + pipe.YOff, 0, 0, pipe.XPos + 100, ((Height - 112) / 2) - (pipe.Gap / 2) + pipe.YOff, 1, 1, _pipeTexture, col);
 
             col = Color4.White;
-            if (checkOverlap(16, bird.pos.X, bird.pos.Y, pipe.xPos, ((Height - 112) / 2) + (pipe.Gap / 2) + pipe.yOff, pipe.xPos + 100, (Height)))
+            if (CheckOverlap(16, bird.Pos.X, bird.Pos.Y, pipe.XPos, ((Height - 112) / 2) + (pipe.Gap / 2) + pipe.YOff, pipe.XPos + 100, (Height)))
             {
-                col = Color4.Red;
-                if (!pipe.hasHitBottom)
-                {
-                    miss++;
-                    pipe.hasHitBottom = true;
-                }
+                _hasDied = true;
             } 
-            drawTexturedRectangle(pipe.xPos, ((Height - 112) / 2) + (pipe.Gap / 2) + 800 + pipe.yOff, 0, 0, pipe.xPos + 100, ((Height - 112) / 2) + (pipe.Gap / 2) + pipe.yOff, 1 , 1,  pipeTexture, col);
+            drawTexturedRectangle(pipe.XPos, ((Height - 112) / 2) + (pipe.Gap / 2) + 800 + pipe.YOff, 0, 0, pipe.XPos + 100, ((Height - 112) / 2) + (pipe.Gap / 2) + pipe.YOff, 1 , 1,  _pipeTexture, col);
 
-            if (pipe.xPos >= (Width / 2) - 2 && pipe.xPos <= (Width / 2) + 3 && !pipe.hasScored)
+            if (pipe.XPos >= (Width / 2) - 10 && pipe.XPos <= (Width / 2) + 10 && !pipe.HasScored && !_hasDied)
             {
-                score++;
-                pipe.hasScored = true;
+                _score++;
+                pipe.HasScored = true;
             }
-
+    
         }
 
-        static bool checkOverlap(int R, float Xc, float Yc,
-                                float X1, float Y1,
-                                float X2, float Y2)
+        static bool CheckOverlap(int r, float xc, float yc,
+                                float x1, float y1,
+                                float x2, float y2)
         {
 
 
-            int Xn = Math.Max((int)X1,
-                     Math.Min((int)Xc, (int)X2));
-            int Yn = Math.Max((int)Y1,
-                     Math.Min((int)Yc, (int)Y2));
+            int xn = Math.Max((int)x1,
+                     Math.Min((int)xc, (int)x2));
+            int yn = Math.Max((int)y1,
+                     Math.Min((int)yc, (int)y2));
 
-            int Dx = (int)Xn - (int)Xc;
-            int Dy = (int)Yn - (int)Yc;
-            return (Dx * Dx + Dy * Dy) <= R * R;
+            int dx = xn - (int)xc;
+            int dy = yn - (int)yc;
+            return (dx * dx + dy * dy) <= r * r;
         }
 
-        private void renderBackground()
+        private void RenderBackground()
         {
             float width = (1000f * 276f) / 512f;
             float nrect = Width / width;
             float xSize = (float)Math.Ceiling(Width / width) * width;
 
-            drawTexturedRectangle(0, 0, tOff, 0, xSize, Height, nrect + tOff, 1, background, Color4.White);
-            tOff += 0.00001f;
+            drawTexturedRectangle(0, 0, _tOff, 0, xSize, Height, nrect + _tOff, 1, _background, Color4.White);
+            _tOff += 0.00001f;
         }
 
-        private void renderBase()
+        private void RenderBase()
         {
             float width = (1000f * 336f) / 512f;
             float nrect = Width / width;
             float xSize = (float)Math.Ceiling(Width / width) * width;
-            drawText(String.Format("bOff: {0}", bOff), 32, 0f, Height - 192f, arial, Color4.Red);
-            drawText(String.Format("texture offset: {0}", ((bOff * nrect) / xSize)), 32, 0f, Height - 224f, arial, Color4.Red);
-            
             Color4 col = Color4.White;
-            if (checkOverlap(16, bird.pos.X, bird.pos.Y, 0, 0, Width, 112))
+            if (CheckOverlap(16, _bird.Pos.X, _bird.Pos.Y, 0, 0, Width, 112))
             {
-                col = Color4.Red;
-                if (missTagBase)
-                {
-                    miss++;
-                    missTagBase = false;
-                }
-            } else
-            {
-                missTagBase = true;
+                _hasHitFloor = true;
+                _hasDied = true;
             }
 
-            drawTexturedRectangle(0, 0, nrect + ((bOff * nrect) / xSize), 0, xSize, 112, (bOff * nrect) / xSize, 1, floor, col);
+            drawTexturedRectangle(0, 0, nrect + ((_bOff * nrect) / xSize), 0, xSize, 112, (_bOff * nrect) / xSize, 1, _floor, col);
+        }
+
+        private void RestartGame()
+        {
+            _hasDied = false;
+            _hasHitFloor = false;
+            _hasStarted = false;
+            _bird = new Bird { Pos = new Vector2(Width / 2, Height / 2), Vel = new Vector2(0f, 0f) };
+            _bOff = Width;
+            _pipe = new List<Pipe>();
+            _tag = true;
+            _hasRestarted = false;
+            
+            if (_score > Convert.ToInt32(set.settings["High Score"]))
+            {
+                set.settings["High Score"] = _score;
+            }
+            set.writeSettings();
+            
+            _score = 0;
         }
     }
 }

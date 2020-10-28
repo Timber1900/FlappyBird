@@ -11,7 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="OpenTK.3D.Library" Version="1.7.0" />
+    <PackageReference Include="OpenTK.3D.Library" Version="1.7.1" />
+    <PackageReference Include="System.Windows.Extensions" Version="4.7.0" />
   </ItemGroup>
 
 </Project>

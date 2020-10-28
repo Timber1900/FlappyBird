@@ -47,7 +47,7 @@
           "lib/net20/OpenTK.dll": {}
         }
       },
-      "OpenTK.3D.Library/1.7.0": {
+      "OpenTK.3D.Library/1.7.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.Win32.SystemEvents": "4.7.0",
@@ -90,6 +90,24 @@
             "rid": "unix"
           },
           "runtimes/win/lib/netcoreapp3.0/System.Drawing.Common.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
+        }
+      },
+      "System.Windows.Extensions/4.7.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Drawing.Common": "4.7.0"
+        },
+        "compile": {
+          "ref/netcoreapp3.0/System.Windows.Extensions.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.0/System.Windows.Extensions.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/netcoreapp3.0/System.Windows.Extensions.dll": {
             "assetType": "runtime",
             "rid": "win"
           }
@@ -190,16 +208,16 @@
         "opentk.nuspec"
       ]
     },
-    "OpenTK.3D.Library/1.7.0": {
-      "sha512": "4ZqJiI1Vu1GTVaqZhxzZlblVmAra6iWOxZvl7o+7Qz5hgVXiF3KN8bYoqSQxEMqVfPKZOJUj7ygQIUgloZ5OnA==",
+    "OpenTK.3D.Library/1.7.1": {
+      "sha512": "k9kyf2hanrtGprJWTe9L+YkY0pJndcZ8+ICha03FqbTtk78B6JCcDeXqBNX72OuB+mSnxufiMSholxR085gZYw==",
       "type": "package",
-      "path": "opentk.3d.library/1.7.0",
+      "path": "opentk.3d.library/1.7.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netcoreapp2.1/Program.dll",
         "lib/netcoreapp3.1/Program.dll",
-        "opentk.3d.library.1.7.0.nupkg.sha512",
+        "opentk.3d.library.1.7.1.nupkg.sha512",
         "opentk.3d.library.nuspec"
       ]
     },
@@ -265,31 +283,49 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "System.Windows.Extensions/4.7.0": {
+      "sha512": "CeWTdRNfRaSh0pm2gDTJFwVaXfTq6Xwv/sA887iwPTneW7oMtMlpvDIO+U60+3GWTB7Aom6oQwv5VZVUhQRdPQ==",
+      "type": "package",
+      "path": "system.windows.extensions/4.7.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/netcoreapp3.0/System.Windows.Extensions.dll",
+        "lib/netcoreapp3.0/System.Windows.Extensions.xml",
+        "ref/netcoreapp3.0/System.Windows.Extensions.dll",
+        "ref/netcoreapp3.0/System.Windows.Extensions.xml",
+        "runtimes/win/lib/netcoreapp3.0/System.Windows.Extensions.dll",
+        "runtimes/win/lib/netcoreapp3.0/System.Windows.Extensions.xml",
+        "system.windows.extensions.4.7.0.nupkg.sha512",
+        "system.windows.extensions.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "OpenTK.3D.Library >= 1.7.0"
+      "OpenTK.3D.Library >= 1.7.1",
+      "System.Windows.Extensions >= 4.7.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\35196\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Hugo Teixeira\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\35196\\source\\repos\\Flappy Bird\\Flappy Bird\\Flappy Bird.csproj",
+      "projectUniqueName": "C:\\Users\\Hugo Teixeira\\RiderProjects\\FlappyBird\\Flappy Bird\\Flappy Bird.csproj",
       "projectName": "Flappy Bird",
-      "projectPath": "C:\\Users\\35196\\source\\repos\\Flappy Bird\\Flappy Bird\\Flappy Bird.csproj",
-      "packagesPath": "C:\\Users\\35196\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\35196\\source\\repos\\Flappy Bird\\Flappy Bird\\obj\\",
+      "projectPath": "C:\\Users\\Hugo Teixeira\\RiderProjects\\FlappyBird\\Flappy Bird\\Flappy Bird.csproj",
+      "packagesPath": "C:\\Users\\Hugo Teixeira\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Hugo Teixeira\\RiderProjects\\FlappyBird\\Flappy Bird\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\35196\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Hugo Teixeira\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -315,7 +351,11 @@
         "dependencies": {
           "OpenTK.3D.Library": {
             "target": "Package",
-            "version": "[1.7.0, )"
+            "version": "[1.7.1, )"
+          },
+          "System.Windows.Extensions": {
+            "target": "Package",
+            "version": "[4.7.0, )"
           }
         },
         "imports": [
@@ -333,7 +373,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
       }
     }
   },
