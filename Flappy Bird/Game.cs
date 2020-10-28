@@ -2,8 +2,14 @@
 //TODO Add sound
 //TODO Medals
 
+//TODO Make better settings
+//TODO Medals
+
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using NAudio.Wave;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
@@ -42,6 +48,7 @@ namespace Flappy_Bird
         private bool _tag = true, _isPaused, _hasStarted, _hasDied, _hasHitFloor, _hasRestarted = true;
         private Texture _pipeTexture, _background, _floor;
         private Font _arial, _flappy;
+
 
 
         public Game(int width, int height, string title)
@@ -156,6 +163,7 @@ namespace Flappy_Bird
                         _bird.Vel.Y = +7.5f;
                         _cur = 30;
                         _tag = false;
+                        Task.Run(() => { PlaySound("assets/wing.wav"); });
                     }
                     if (!mouse.IsButtonDown(MouseButton.Left))
                     {
@@ -277,6 +285,7 @@ namespace Flappy_Bird
             if (CheckOverlap(16, bird.Pos.X, bird.Pos.Y, pipe.XPos, 112, pipe.XPos + 100, ((Height - 112) / 2) - (pipe.Gap / 2) + pipe.YOff))
             {
                 _hasDied = true;
+                
             } 
 
             drawTexturedRectangle(pipe.XPos, ((Height - 112) / 2) - (pipe.Gap / 2) - 800 + pipe.YOff, 0, 0, pipe.XPos + 100, ((Height - 112) / 2) - (pipe.Gap / 2) + pipe.YOff, 1, 1, _pipeTexture, col);
@@ -292,6 +301,7 @@ namespace Flappy_Bird
             {
                 _score++;
                 pipe.HasScored = true;
+                Task.Run(() => { PlaySound("assets/point.wav"); });
             }
     
         }
@@ -356,5 +366,19 @@ namespace Flappy_Bird
             
             _score = 0;
         }
+
+        private void PlaySound(String path)
+        {
+            using var audioFile = new AudioFileReader(path);
+            using var outputDevice = new WaveOutEvent();
+            outputDevice.Init(audioFile);
+            outputDevice.Play();
+            if (outputDevice.PlaybackState == PlaybackState.Playing)
+            {
+                Thread.Sleep(1000);
+            }
+        }
+
     }
+    
 }

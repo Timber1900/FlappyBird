@@ -38,9 +38,13 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "NAudio": {
+              "target": "Package",
+              "version": "[1.10.0, )"
+            },
             "OpenTK.3D.Library": {
               "target": "Package",
-              "version": "[1.7.2, )"
+              "version": "[1.7.1, )"
             },
             "System.Windows.Extensions": {
               "target": "Package",
