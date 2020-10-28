@@ -1,4 +1,8 @@
-﻿using System;
+﻿//TODO Make better settings
+//TODO Add sound
+//TODO Medals
+
+using System;
 using System.Collections.Generic;
 using OpenTK;
 using OpenTK.Graphics;
