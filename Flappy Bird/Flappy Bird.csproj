@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Flappy_Bird</RootNamespace>
   </PropertyGroup>
@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="OpenTK.3D.Library" Version="1.7.1" />
+    <PackageReference Include="OpenTK.3D.Library" Version="1.7.2" />
     <PackageReference Include="System.Windows.Extensions" Version="4.7.0" />
   </ItemGroup>
 

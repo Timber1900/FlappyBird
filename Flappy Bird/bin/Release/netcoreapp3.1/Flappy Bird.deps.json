@@ -8,7 +8,8 @@
     ".NETCoreApp,Version=v3.1": {
       "Flappy Bird/1.0.0": {
         "dependencies": {
-          "OpenTK.3D.Library": "1.4.1"
+          "OpenTK.3D.Library": "1.7.2",
+          "System.Windows.Extensions": "4.7.0"
         },
         "runtime": {
           "Flappy Bird.dll": {}
@@ -34,6 +35,14 @@
           }
         }
       },
+      "Newtonsoft.Json/12.0.3": {
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "12.0.0.0",
+            "fileVersion": "12.0.3.23909"
+          }
+        }
+      },
       "OpenTK/3.2.0": {
         "runtime": {
           "lib/net20/OpenTK.dll": {
@@ -42,17 +51,18 @@
           }
         }
       },
-      "OpenTK.3D.Library/1.4.1": {
+      "OpenTK.3D.Library/1.7.2": {
         "dependencies": {
           "Microsoft.Win32.SystemEvents": "4.7.0",
+          "Newtonsoft.Json": "12.0.3",
           "OpenTK": "3.2.0",
           "SixLabors.ImageSharp": "1.0.1",
           "System.Drawing.Common": "4.7.0"
         },
         "runtime": {
           "lib/netcoreapp3.1/Program.dll": {
-            "assemblyVersion": "1.4.1.0",
-            "fileVersion": "1.4.1.0"
+            "assemblyVersion": "1.7.2.0",
+            "fileVersion": "1.7.2.0"
           }
         }
       },
@@ -89,6 +99,25 @@
             "fileVersion": "4.700.19.56404"
           }
         }
+      },
+      "System.Windows.Extensions/4.7.0": {
+        "dependencies": {
+          "System.Drawing.Common": "4.7.0"
+        },
+        "runtime": {
+          "lib/netcoreapp3.0/System.Windows.Extensions.dll": {
+            "assemblyVersion": "4.0.1.0",
+            "fileVersion": "4.700.19.56404"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/netcoreapp3.0/System.Windows.Extensions.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "4.0.1.0",
+            "fileVersion": "4.700.19.56404"
+          }
+        }
       }
     }
   },
@@ -112,6 +141,13 @@
       "path": "microsoft.win32.systemevents/4.7.0",
       "hashPath": "microsoft.win32.systemevents.4.7.0.nupkg.sha512"
     },
+    "Newtonsoft.Json/12.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
+      "path": "newtonsoft.json/12.0.3",
+      "hashPath": "newtonsoft.json.12.0.3.nupkg.sha512"
+    },
     "OpenTK/3.2.0": {
       "type": "package",
       "serviceable": true,
@@ -119,12 +155,12 @@
       "path": "opentk/3.2.0",
       "hashPath": "opentk.3.2.0.nupkg.sha512"
     },
-    "OpenTK.3D.Library/1.4.1": {
+    "OpenTK.3D.Library/1.7.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-/YpxgAGGokNX5jPLrvcFox5twrSjtt7lr8nWU4ea4yKkiZGw4MsWHEZhHc9CbpDp0QJ+QxQXyhxZwvFMFlLPaQ==",
-      "path": "opentk.3d.library/1.4.1",
-      "hashPath": "opentk.3d.library.1.4.1.nupkg.sha512"
+      "sha512": "sha512-KLTfehbLWno/caM4j+EEMCcKfNxF/iAoYOzMlPKga7UltKJOlgSCJP6EeB1U/KXx5EIT1jyZYt+FiGsPziQSow==",
+      "path": "opentk.3d.library/1.7.2",
+      "hashPath": "opentk.3d.library.1.7.2.nupkg.sha512"
     },
     "SixLabors.ImageSharp/1.0.1": {
       "type": "package",
@@ -139,6 +175,13 @@
       "sha512": "sha512-v+XbyYHaZjDfn0ENmJEV1VYLgGgCTx1gnfOBcppowbpOAriglYgGCvFCPr2EEZyBvXlpxbEsTwkOlInl107ahA==",
       "path": "system.drawing.common/4.7.0",
       "hashPath": "system.drawing.common.4.7.0.nupkg.sha512"
+    },
+    "System.Windows.Extensions/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-CeWTdRNfRaSh0pm2gDTJFwVaXfTq6Xwv/sA887iwPTneW7oMtMlpvDIO+U60+3GWTB7Aom6oQwv5VZVUhQRdPQ==",
+      "path": "system.windows.extensions/4.7.0",
+      "hashPath": "system.windows.extensions.4.7.0.nupkg.sha512"
     }
   }
 }
