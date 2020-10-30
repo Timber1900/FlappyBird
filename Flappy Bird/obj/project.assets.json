@@ -65,15 +65,6 @@
           "lib/netcoreapp3.0/NAudio.dll": {}
         }
       },
-      "Newtonsoft.Json/12.0.3": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
-        }
-      },
       "OpenTK/3.2.0": {
         "type": "package",
         "compile": {
@@ -83,11 +74,10 @@
           "lib/net20/OpenTK.dll": {}
         }
       },
-      "OpenTK.3D.Library/1.7.1": {
+      "OpenTK.3D.Library/1.7.3": {
         "type": "package",
         "dependencies": {
           "Microsoft.Win32.SystemEvents": "4.7.0",
-          "Newtonsoft.Json": "12.0.3",
           "OpenTK": "3.2.0",
           "SixLabors.ImageSharp": "1.0.1",
           "System.Drawing.Common": "4.7.0"
@@ -312,37 +302,6 @@
         "naudio.nuspec"
       ]
     },
-    "Newtonsoft.Json/12.0.3": {
-      "sha512": "6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
-      "type": "package",
-      "path": "newtonsoft.json/12.0.3",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE.md",
-        "lib/net20/Newtonsoft.Json.dll",
-        "lib/net20/Newtonsoft.Json.xml",
-        "lib/net35/Newtonsoft.Json.dll",
-        "lib/net35/Newtonsoft.Json.xml",
-        "lib/net40/Newtonsoft.Json.dll",
-        "lib/net40/Newtonsoft.Json.xml",
-        "lib/net45/Newtonsoft.Json.dll",
-        "lib/net45/Newtonsoft.Json.xml",
-        "lib/netstandard1.0/Newtonsoft.Json.dll",
-        "lib/netstandard1.0/Newtonsoft.Json.xml",
-        "lib/netstandard1.3/Newtonsoft.Json.dll",
-        "lib/netstandard1.3/Newtonsoft.Json.xml",
-        "lib/netstandard2.0/Newtonsoft.Json.dll",
-        "lib/netstandard2.0/Newtonsoft.Json.xml",
-        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.dll",
-        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.xml",
-        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.dll",
-        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
-        "newtonsoft.json.12.0.3.nupkg.sha512",
-        "newtonsoft.json.nuspec",
-        "packageIcon.png"
-      ]
-    },
     "OpenTK/3.2.0": {
       "sha512": "31L+x7r3EV1bnRjzqk/Z6rh3oO4h2kNa68+hbwAvXctHS+eI00x9d+ox++wY+uoKg2y0ILi7wQRBLktcb7/fEQ==",
       "type": "package",
@@ -358,16 +317,16 @@
         "opentk.nuspec"
       ]
     },
-    "OpenTK.3D.Library/1.7.1": {
-      "sha512": "k9kyf2hanrtGprJWTe9L+YkY0pJndcZ8+ICha03FqbTtk78B6JCcDeXqBNX72OuB+mSnxufiMSholxR085gZYw==",
+    "OpenTK.3D.Library/1.7.3": {
+      "sha512": "MAhVvxi0dbwn0fUh234iWdLTBDFmXl1y93A0c7DJ+fxVUhrPkjD0fvgPjWZCXSShagNZDDlHam+sf8UD0P7tbA==",
       "type": "package",
-      "path": "opentk.3d.library/1.7.1",
+      "path": "opentk.3d.library/1.7.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netcoreapp2.1/Program.dll",
         "lib/netcoreapp3.1/Program.dll",
-        "opentk.3d.library.1.7.1.nupkg.sha512",
+        "opentk.3d.library.1.7.3.nupkg.sha512",
         "opentk.3d.library.nuspec"
       ]
     },
@@ -578,7 +537,7 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "NAudio >= 1.10.0",
-      "OpenTK.3D.Library >= 1.7.1",
+      "OpenTK.3D.Library >= 1.7.3",
       "System.Windows.Extensions >= 4.7.0"
     ]
   },
@@ -625,7 +584,7 @@
           },
           "OpenTK.3D.Library": {
             "target": "Package",
-            "version": "[1.7.1, )"
+            "version": "[1.7.3, )"
           },
           "System.Windows.Extensions": {
             "target": "Package",

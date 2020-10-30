@@ -8,7 +8,8 @@
     ".NETCoreApp,Version=v3.1": {
       "Flappy Bird/1.0.0": {
         "dependencies": {
-          "OpenTK.3D.Library": "1.7.2",
+          "NAudio": "1.10.0",
+          "OpenTK.3D.Library": "1.7.3",
           "System.Windows.Extensions": "4.7.0"
         },
         "runtime": {
@@ -16,6 +17,12 @@
         }
       },
       "Microsoft.NETCore.Platforms/3.1.0": {},
+      "Microsoft.Win32.Registry/4.7.0": {
+        "dependencies": {
+          "System.Security.AccessControl": "4.7.0",
+          "System.Security.Principal.Windows": "4.7.0"
+        }
+      },
       "Microsoft.Win32.SystemEvents/4.7.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "3.1.0"
@@ -35,11 +42,15 @@
           }
         }
       },
-      "Newtonsoft.Json/12.0.3": {
+      "NAudio/1.10.0": {
+        "dependencies": {
+          "Microsoft.Win32.Registry": "4.7.0",
+          "System.Resources.Extensions": "4.7.0"
+        },
         "runtime": {
-          "lib/netstandard2.0/Newtonsoft.Json.dll": {
-            "assemblyVersion": "12.0.0.0",
-            "fileVersion": "12.0.3.23909"
+          "lib/netcoreapp3.0/NAudio.dll": {
+            "assemblyVersion": "1.10.0.0",
+            "fileVersion": "1.10.0.0"
           }
         }
       },
@@ -51,18 +62,17 @@
           }
         }
       },
-      "OpenTK.3D.Library/1.7.2": {
+      "OpenTK.3D.Library/1.7.3": {
         "dependencies": {
           "Microsoft.Win32.SystemEvents": "4.7.0",
-          "Newtonsoft.Json": "12.0.3",
           "OpenTK": "3.2.0",
           "SixLabors.ImageSharp": "1.0.1",
           "System.Drawing.Common": "4.7.0"
         },
         "runtime": {
           "lib/netcoreapp3.1/Program.dll": {
-            "assemblyVersion": "1.7.2.0",
-            "fileVersion": "1.7.2.0"
+            "assemblyVersion": "1.7.3.0",
+            "fileVersion": "1.7.3.0"
           }
         }
       },
@@ -100,6 +110,21 @@
           }
         }
       },
+      "System.Resources.Extensions/4.7.0": {
+        "runtime": {
+          "lib/netstandard2.0/System.Resources.Extensions.dll": {
+            "assemblyVersion": "4.0.1.0",
+            "fileVersion": "4.700.19.56404"
+          }
+        }
+      },
+      "System.Security.AccessControl/4.7.0": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "3.1.0",
+          "System.Security.Principal.Windows": "4.7.0"
+        }
+      },
+      "System.Security.Principal.Windows/4.7.0": {},
       "System.Windows.Extensions/4.7.0": {
         "dependencies": {
           "System.Drawing.Common": "4.7.0"
@@ -134,6 +159,13 @@
       "path": "microsoft.netcore.platforms/3.1.0",
       "hashPath": "microsoft.netcore.platforms.3.1.0.nupkg.sha512"
     },
+    "Microsoft.Win32.Registry/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KSrRMb5vNi0CWSGG1++id2ZOs/1QhRqROt+qgbEAdQuGjGrFcl4AOl4/exGPUYz2wUnU42nvJqon1T3U0kPXLA==",
+      "path": "microsoft.win32.registry/4.7.0",
+      "hashPath": "microsoft.win32.registry.4.7.0.nupkg.sha512"
+    },
     "Microsoft.Win32.SystemEvents/4.7.0": {
       "type": "package",
       "serviceable": true,
@@ -141,12 +173,12 @@
       "path": "microsoft.win32.systemevents/4.7.0",
       "hashPath": "microsoft.win32.systemevents.4.7.0.nupkg.sha512"
     },
-    "Newtonsoft.Json/12.0.3": {
+    "NAudio/1.10.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
-      "path": "newtonsoft.json/12.0.3",
-      "hashPath": "newtonsoft.json.12.0.3.nupkg.sha512"
+      "sha512": "sha512-y6VvwSPfJhElUllkzE2FHXHAADYFGLwMPt048KlPyuUXcq4E0VEi+4hWrFd+lBsrb+Q5DvPA9w86oRTvKRO9UQ==",
+      "path": "naudio/1.10.0",
+      "hashPath": "naudio.1.10.0.nupkg.sha512"
     },
     "OpenTK/3.2.0": {
       "type": "package",
@@ -155,12 +187,12 @@
       "path": "opentk/3.2.0",
       "hashPath": "opentk.3.2.0.nupkg.sha512"
     },
-    "OpenTK.3D.Library/1.7.2": {
+    "OpenTK.3D.Library/1.7.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-KLTfehbLWno/caM4j+EEMCcKfNxF/iAoYOzMlPKga7UltKJOlgSCJP6EeB1U/KXx5EIT1jyZYt+FiGsPziQSow==",
-      "path": "opentk.3d.library/1.7.2",
-      "hashPath": "opentk.3d.library.1.7.2.nupkg.sha512"
+      "sha512": "sha512-MAhVvxi0dbwn0fUh234iWdLTBDFmXl1y93A0c7DJ+fxVUhrPkjD0fvgPjWZCXSShagNZDDlHam+sf8UD0P7tbA==",
+      "path": "opentk.3d.library/1.7.3",
+      "hashPath": "opentk.3d.library.1.7.3.nupkg.sha512"
     },
     "SixLabors.ImageSharp/1.0.1": {
       "type": "package",
@@ -175,6 +207,27 @@
       "sha512": "sha512-v+XbyYHaZjDfn0ENmJEV1VYLgGgCTx1gnfOBcppowbpOAriglYgGCvFCPr2EEZyBvXlpxbEsTwkOlInl107ahA==",
       "path": "system.drawing.common/4.7.0",
       "hashPath": "system.drawing.common.4.7.0.nupkg.sha512"
+    },
+    "System.Resources.Extensions/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Efd5jls31pR1MkEl/IlT/lOzG0nGRCoYnHctZTq597+absekOXaP53yUlv5U4DfcfImSAAupWVpTW1tE54lF7A==",
+      "path": "system.resources.extensions/4.7.0",
+      "hashPath": "system.resources.extensions.4.7.0.nupkg.sha512"
+    },
+    "System.Security.AccessControl/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JECvTt5aFF3WT3gHpfofL2MNNP6v84sxtXxpqhLBCcDRzqsPBmHhQ6shv4DwwN2tRlzsUxtb3G9M3763rbXKDg==",
+      "path": "system.security.accesscontrol/4.7.0",
+      "hashPath": "system.security.accesscontrol.4.7.0.nupkg.sha512"
+    },
+    "System.Security.Principal.Windows/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ojD0PX0XhneCsUbAZVKdb7h/70vyYMDYs85lwEI+LngEONe/17A0cFaRFqZU+sOEidcVswYWikYOQ9PPfjlbtQ==",
+      "path": "system.security.principal.windows/4.7.0",
+      "hashPath": "system.security.principal.windows.4.7.0.nupkg.sha512"
     },
     "System.Windows.Extensions/4.7.0": {
       "type": "package",

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "AbMwjuIFuP5Odg7sgSYxewacXJP1i0AadcLkPFBJpXZX8TS7KcFWHxgZvRf8na2OuaAP2YG59qI2ozXGvxJVzA==",
+  "dgSpecHash": "RGBrWbJb5HbT6wzKRfQHGhzw4bo0JQXElwkj79qGrkzBFw8T7qISmDiJ38sucwp37JMdIMLw4RCQzsgf/qUDew==",
   "success": true,
   "projectFilePath": "C:\\Users\\Hugo Teixeira\\RiderProjects\\FlappyBird\\Flappy Bird\\Flappy Bird.csproj",
   "expectedPackageFiles": [
@@ -8,9 +8,8 @@
     "C:\\Users\\Hugo Teixeira\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\Hugo Teixeira\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\Hugo Teixeira\\.nuget\\packages\\naudio\\1.10.0\\naudio.1.10.0.nupkg.sha512",
-    "C:\\Users\\Hugo Teixeira\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\Hugo Teixeira\\.nuget\\packages\\opentk\\3.2.0\\opentk.3.2.0.nupkg.sha512",
-    "C:\\Users\\Hugo Teixeira\\.nuget\\packages\\opentk.3d.library\\1.7.1\\opentk.3d.library.1.7.1.nupkg.sha512",
+    "C:\\Users\\Hugo Teixeira\\.nuget\\packages\\opentk.3d.library\\1.7.3\\opentk.3d.library.1.7.3.nupkg.sha512",
     "C:\\Users\\Hugo Teixeira\\.nuget\\packages\\sixlabors.imagesharp\\1.0.1\\sixlabors.imagesharp.1.0.1.nupkg.sha512",
     "C:\\Users\\Hugo Teixeira\\.nuget\\packages\\system.drawing.common\\4.7.0\\system.drawing.common.4.7.0.nupkg.sha512",
     "C:\\Users\\Hugo Teixeira\\.nuget\\packages\\system.resources.extensions\\4.7.0\\system.resources.extensions.4.7.0.nupkg.sha512",
