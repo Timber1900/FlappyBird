@@ -46,3 +46,7 @@ C:\Users\Hugo Teixeira\RiderProjects\FlappyBird\Flappy Bird\obj\Release\netcorea
 C:\Users\Hugo Teixeira\RiderProjects\FlappyBird\Flappy Bird\obj\Release\netcoreapp3.1\Flappy Bird.genruntimeconfig.cache
 C:\Users\Hugo Teixeira\RiderProjects\FlappyBird\Flappy Bird\bin\Release\netcoreapp3.1\NAudio.dll
 C:\Users\Hugo Teixeira\RiderProjects\FlappyBird\Flappy Bird\bin\Release\netcoreapp3.1\System.Resources.Extensions.dll
+C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\bin\Release\netcoreapp3.1\NAudio.dll
+C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\bin\Release\netcoreapp3.1\System.Resources.Extensions.dll
+C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\bin\Release\netcoreapp3.1\System.Windows.Extensions.dll
+C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\bin\Release\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll

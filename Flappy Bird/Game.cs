@@ -1,8 +1,4 @@
 ﻿//TODO Make better settings
-//TODO Add sound
-//TODO Medals
-
-//TODO Make better settings
 //TODO Medals
 
 using System;

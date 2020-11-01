@@ -11,7 +11,6 @@ C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\bin\Debug\netcoreapp3.1\Flap
 C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\bin\Debug\netcoreapp3.1\Flappy Bird.runtimeconfig.json
 C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\bin\Debug\netcoreapp3.1\Flappy Bird.runtimeconfig.dev.json
 C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\bin\Debug\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
-C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\bin\Debug\netcoreapp3.1\OpenTK.dll
 C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\bin\Debug\netcoreapp3.1\Program.dll
 C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\bin\Debug\netcoreapp3.1\SixLabors.ImageSharp.dll
@@ -46,3 +45,7 @@ C:\Users\Hugo Teixeira\RiderProjects\FlappyBird\Flappy Bird\obj\Debug\netcoreapp
 C:\Users\Hugo Teixeira\RiderProjects\FlappyBird\Flappy Bird\obj\Debug\netcoreapp3.1\Flappy Bird.genruntimeconfig.cache
 C:\Users\Hugo Teixeira\RiderProjects\FlappyBird\Flappy Bird\bin\Debug\netcoreapp3.1\System.Windows.Extensions.dll
 C:\Users\Hugo Teixeira\RiderProjects\FlappyBird\Flappy Bird\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\bin\Debug\netcoreapp3.1\NAudio.dll
+C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\bin\Debug\netcoreapp3.1\System.Resources.Extensions.dll
+C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\bin\Debug\netcoreapp3.1\System.Windows.Extensions.dll
+C:\Users\35196\source\repos\Flappy Bird\Flappy Bird\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
