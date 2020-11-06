@@ -124,6 +124,7 @@ namespace Flappy_Bird
         {
             _isPaused = showSet;
             MouseState mouse;
+            KeyboardState keyboard;
             if (!_isPaused && _hasStarted && !_hasDied)
             {
                 float change = 500f * (float)e.Time;
@@ -158,14 +159,15 @@ namespace Flappy_Bird
                 if (Focused)
                 {
                     mouse = Mouse.GetState();
-                    if (mouse.IsButtonDown(MouseButton.Left) && _tag)
+                    keyboard = Keyboard.GetState();
+                    if ((mouse.IsButtonDown(MouseButton.Left) || keyboard.IsKeyDown(Key.Space)) && _tag)
                     {
                         _bird.Vel.Y = +7.5f;
                         _cur = 30;
                         _tag = false;
                         Task.Run(() => { PlaySound("assets/wing.wav"); });
                     }
-                    if (!mouse.IsButtonDown(MouseButton.Left))
+                    if (!mouse.IsButtonDown(MouseButton.Left) && !keyboard.IsKeyDown(Key.Space))
                     {
                         _tag = true;
                     }
@@ -183,7 +185,8 @@ namespace Flappy_Bird
                 if (Focused)
                 {
                     mouse = Mouse.GetState();
-                    if (mouse.IsButtonDown(MouseButton.Left) && _hasRestarted)
+                    keyboard = Keyboard.GetState();
+                    if ((mouse.IsButtonDown(MouseButton.Left) || keyboard.IsKeyDown(Key.Space))  && _hasRestarted)
                     {
                         _hasStarted = true;
                         _curDif = 1;
@@ -207,13 +210,15 @@ namespace Flappy_Bird
             else
             {
                 mouse = Mouse.GetState();
-                if (mouse.IsButtonDown(MouseButton.Left))
+                keyboard = Keyboard.GetState();
+                if (mouse.IsButtonDown(MouseButton.Left) || keyboard.IsKeyDown(Key.Space))
                 { 
                     RestartGame();
                 }
             }
             mouse = Mouse.GetState();
-            if (!mouse.IsAnyButtonDown)
+            keyboard = Keyboard.GetState();
+            if (!mouse.IsAnyButtonDown && !keyboard.IsAnyKeyDown)
             {
                 _hasRestarted = true;
             }
