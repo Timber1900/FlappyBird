@@ -9,7 +9,7 @@
       "Flappy Bird/1.0.0": {
         "dependencies": {
           "NAudio": "1.10.0",
-          "OpenTK.3D.Library": "1.7.3",
+          "OpenTK.3D.Library": "1.8.2",
           "System.Windows.Extensions": "4.7.0"
         },
         "runtime": {
@@ -54,6 +54,14 @@
           }
         }
       },
+      "Newtonsoft.Json/12.0.3": {
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "12.0.0.0",
+            "fileVersion": "12.0.3.23909"
+          }
+        }
+      },
       "OpenTK/3.2.0": {
         "runtime": {
           "lib/net20/OpenTK.dll": {
@@ -62,17 +70,18 @@
           }
         }
       },
-      "OpenTK.3D.Library/1.7.3": {
+      "OpenTK.3D.Library/1.8.2": {
         "dependencies": {
           "Microsoft.Win32.SystemEvents": "4.7.0",
+          "Newtonsoft.Json": "12.0.3",
           "OpenTK": "3.2.0",
           "SixLabors.ImageSharp": "1.0.1",
           "System.Drawing.Common": "4.7.0"
         },
         "runtime": {
           "lib/netcoreapp3.1/Program.dll": {
-            "assemblyVersion": "1.7.3.0",
-            "fileVersion": "1.7.3.0"
+            "assemblyVersion": "1.8.2.0",
+            "fileVersion": "1.8.2.0"
           }
         }
       },
@@ -180,6 +189,13 @@
       "path": "naudio/1.10.0",
       "hashPath": "naudio.1.10.0.nupkg.sha512"
     },
+    "Newtonsoft.Json/12.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
+      "path": "newtonsoft.json/12.0.3",
+      "hashPath": "newtonsoft.json.12.0.3.nupkg.sha512"
+    },
     "OpenTK/3.2.0": {
       "type": "package",
       "serviceable": true,
@@ -187,12 +203,12 @@
       "path": "opentk/3.2.0",
       "hashPath": "opentk.3.2.0.nupkg.sha512"
     },
-    "OpenTK.3D.Library/1.7.3": {
+    "OpenTK.3D.Library/1.8.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-MAhVvxi0dbwn0fUh234iWdLTBDFmXl1y93A0c7DJ+fxVUhrPkjD0fvgPjWZCXSShagNZDDlHam+sf8UD0P7tbA==",
-      "path": "opentk.3d.library/1.7.3",
-      "hashPath": "opentk.3d.library.1.7.3.nupkg.sha512"
+      "sha512": "sha512-zLiy6fiFwkysk3DPJOkmn/7+vtM9E0gPjtb2sGvHdV4OKBpkh5ncqgOymSi/XAO9EqrQxEK5D1tMOPuOq+ZdxA==",
+      "path": "opentk.3d.library/1.8.2",
+      "hashPath": "opentk.3d.library.1.8.2.nupkg.sha512"
     },
     "SixLabors.ImageSharp/1.0.1": {
       "type": "package",

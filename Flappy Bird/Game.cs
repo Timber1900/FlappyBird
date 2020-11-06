@@ -292,7 +292,6 @@ namespace Flappy_Bird
                 _hasDied = true;
             } 
             drawTexturedRectangle(pipe.XPos, ((Height - 112) / 2) + (pipe.Gap / 2) + 800 + pipe.YOff, 0, 0, pipe.XPos + 100, ((Height - 112) / 2) + (pipe.Gap / 2) + pipe.YOff, 1 , 1,  _pipeTexture, col);
-
             if (pipe.XPos >= (Width / 2) - 10 && pipe.XPos <= (Width / 2) + 10 && !pipe.HasScored && !_hasDied)
             {
                 _score++;
