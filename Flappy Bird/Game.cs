@@ -6,10 +6,10 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using NAudio.Wave;
-using OpenTK;
-using OpenTK.Graphics;
-using OpenTK.Graphics.OpenGL;
-using OpenTK.Input;
+using OpenTK.Graphics.OpenGL4;
+using OpenTK.Mathematics;
+using OpenTK.Windowing.Common;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 using Program;
 
 namespace Flappy_Bird
@@ -23,8 +23,8 @@ namespace Flappy_Bird
 
             public void Update(Vector2 force, float fElapsedTime)
             {
-                Vel += force * fElapsedTime;
                 Pos += Vel;
+                Vel += force * fElapsedTime;
             }
         }
 
@@ -41,18 +41,18 @@ namespace Flappy_Bird
         private List<Pipe> _pipe = new List<Pipe> ();
         private int _score, _lastY;
         private float _tOff, _bOff, _curDif = 0.35f, _cur, _angle, _x, _diePlace;
-        private bool _tag = true, _isPaused, _hasStarted, _hasDied, _hasHitFloor, _hasRestarted = true;
+        private bool _tag = true, _isPaused, _hasStarted, _hasDied = false, _hasHitFloor, _hasRestarted = true;
         private Texture _pipeTexture, _background, _floor;
         private Font _arial, _flappy;
 
 
 
-        public Game(int width, int height, string title)
-            : base(width, height, title)
+        public Game(int width, int height, string title, double fps)
+            : base(width, height, title, fps)
         {
         }
 
-        protected override void OnLoad(EventArgs e)
+        protected override void OnLoad()
         {
             setClearColor(new Color4(0.0f, 0.0f, 0.0f, 1.0f)); //Sets Background Color
             UseDepthTest = false; //Enables Depth Testing for 3D
@@ -61,7 +61,6 @@ namespace Flappy_Bird
             KeyboardAndMouseInput = false; //Enables keyboard and mouse input for 3D movement
             useSettings = true;
             CursorVisible = true;
-            _bird = new Bird { Pos = new Vector2(Width / 2, Height / 2), Vel = new Vector2(0f, 0f) };
             _arial = new Font("assets/arial.fnt", "assets/arial_0.png");
             _flappy = new Font("assets/flappy.fnt", "assets/flappy_0.png");
             _pipeTexture = new Texture("assets/pipe-green.png", TextureMinFilter.Nearest, TextureMagFilter.Nearest);
@@ -69,7 +68,7 @@ namespace Flappy_Bird
             _bOff = Width;
             _hasHitFloor = false;
 
-            set.addButton("Exit Game", 10, 10, 180, 40, Color4.Blue, () => { Exit(); return 1; }, _arial);
+            set.addButton("Exit Game", 10, 10, 180, 40, Color4.Blue, () => { Close(); return 1; }, _arial);
             set.addButton("Change Background", 10, 60, 180, 40, Color4.Blue, () =>
             {
                 if (Convert.ToString(set.settings["Background Texture"]) == "assets/background-day.png")
@@ -87,8 +86,10 @@ namespace Flappy_Bird
 
             set.readSettings();
             _background = new Texture(Convert.ToString(set.settings["Background Texture"]), TextureMinFilter.Nearest, TextureMagFilter.Nearest);
+            _hasRestarted = true;
+            base.OnLoad();
+            _bird = new Bird { Pos = new Vector2(Width / 2, Height / 2), Vel = new Vector2(0f, 0f) };
 
-            base.OnLoad(e);
         }
 
 
@@ -119,8 +120,7 @@ namespace Flappy_Bird
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             _isPaused = showSet;
-            MouseState mouse;
-            KeyboardState keyboard;
+
             if (!_isPaused && _hasStarted && !_hasDied)
             {
                 float change = 500f * (float)e.Time;
@@ -152,18 +152,16 @@ namespace Flappy_Bird
                 _x += change;
 
 
-                if (Focused)
+                if (IsFocused)
                 {
-                    mouse = Mouse.GetState();
-                    keyboard = Keyboard.GetState();
-                    if ((mouse.IsButtonDown(MouseButton.Left) || keyboard.IsKeyDown(Key.Space)) && _tag)
+                    if ((MouseState.IsButtonDown(MouseButton.Left) || KeyboardState.IsKeyDown(Keys.Space)) && _tag)
                     {
-                        _bird.Vel.Y = +7.5f;
+                        _bird.Vel.Y = 7.5f;
                         _cur = 30;
                         _tag = false;
                         Task.Run(() => { PlaySound("assets/wing.wav"); });
                     }
-                    if (!mouse.IsButtonDown(MouseButton.Left) && !keyboard.IsKeyDown(Key.Space))
+                    if (!MouseState.IsButtonDown(MouseButton.Left) && !KeyboardState.IsKeyDown(Keys.Space))
                     {
                         _tag = true;
                     }
@@ -178,11 +176,9 @@ namespace Flappy_Bird
             }
             else if (!_hasDied)
             {
-                if (Focused)
+                if (IsFocused)
                 {
-                    mouse = Mouse.GetState();
-                    keyboard = Keyboard.GetState();
-                    if ((mouse.IsButtonDown(MouseButton.Left) || keyboard.IsKeyDown(Key.Space))  && _hasRestarted)
+                    if ((MouseState.IsButtonDown(MouseButton.Left) || KeyboardState.IsKeyDown(Keys.Space))  && _hasRestarted)
                     {
                         _hasStarted = true;
                         _curDif = 1;
@@ -193,7 +189,6 @@ namespace Flappy_Bird
                 {
                     _cur = 30;
                 }
-
                 if (!showSet)
                 {
                     float change = 500f * (float)e.Time;
@@ -205,16 +200,12 @@ namespace Flappy_Bird
             }
             else
             {
-                mouse = Mouse.GetState();
-                keyboard = Keyboard.GetState();
-                if (mouse.IsButtonDown(MouseButton.Left) || keyboard.IsKeyDown(Key.Space))
+                if (MouseState.IsButtonDown(MouseButton.Left) || KeyboardState.IsKeyDown(Keys.Space))
                 { 
                     RestartGame();
                 }
             }
-            mouse = Mouse.GetState();
-            keyboard = Keyboard.GetState();
-            if (!mouse.IsAnyButtonDown && !keyboard.IsAnyKeyDown)
+            if (!MouseState.IsAnyButtonDown && !KeyboardState.IsAnyKeyDown)
             {
                 _hasRestarted = true;
             }
@@ -230,7 +221,7 @@ namespace Flappy_Bird
             base.OnUpdateFrame(e);
         }
 
-        protected override void OnUnload(EventArgs e)
+        protected override void OnUnload()
         {
             GL.DeleteTexture(_pipeTexture.Handle);
             if (_score > Convert.ToInt32(set.settings["High Score"]))
@@ -238,7 +229,7 @@ namespace Flappy_Bird
                 set.settings["High Score"] = _score;
             }
             set.writeSettings();
-            base.OnUnload(e);
+            base.OnUnload();
         }
         private void ShowBird(Bird bird)
         {

@@ -11,9 +11,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Program, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\OpenTK3DEngine\Program\bin\Release\netcoreapp3.1\Program.dll</HintPath>
+    </Reference>
+    <Reference Include="Program, Version=2.0.1.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\OpenTK3DEngine\Program\bin\Release\netcoreapp3.1\Program.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Win32.SystemEvents" Version="4.7.0" />
     <PackageReference Include="NAudio" Version="1.10.0" />
-    <PackageReference Include="OpenTK.3D.Library" Version="1.8.2" />
-    <PackageReference Include="System.Windows.Extensions" Version="4.7.0" />
+    <PackageReference Include="OpenTK" Version="4.1.0" />
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
   </ItemGroup>
 
 </Project>
